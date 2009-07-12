@@ -43,6 +43,8 @@ module Jekyll
 
       if self.data.has_key?('published') && self.data['published'] == false
         self.published = false
+      elsif self.site.published_check && self.data['published'] != true
+        self.published = false
       else
         self.published = true
       end

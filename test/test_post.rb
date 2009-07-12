@@ -203,13 +203,31 @@ class TestPost < Test::Unit::TestCase
 
     context "initializing posts" do
       should "publish when published yaml is no specified" do
-        post = setup_post("2008-02-02-published.textile")
+        post = setup_post("2008-02-02-published-not-specified.textile")
         assert_equal true, post.published
       end
 
       should "not published when published yaml is false" do
         post = setup_post("2008-02-02-not-published.textile")
         assert_equal false, post.published
+      end
+
+      should "publish when site.published_check and published yaml is true" do
+        @site.published_check = true
+        post = setup_post("2008-02-02-published.textile")
+        assert_equal true, post.published
+      end
+
+      should "not publish when site.published_check and published yaml is not specified" do
+        @site.published_check = true
+        post = setup_post("2008-02-02-published-not-specified.textile")
+        assert_equal false, post.published
+      end
+
+      should "not published when site.published_check and published yaml not true" do
+        @site.published_check = true
+        post = setup_post("2008-02-02-published.textile")
+        assert_equal true, post.published
       end
 
       should "recognize category in yaml" do

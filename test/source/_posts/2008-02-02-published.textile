@@ -2,6 +2,7 @@
 layout: default
 title: Publish
 category: publish_test
+published: true
 ---
 
 This should be published.
